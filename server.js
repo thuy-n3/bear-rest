@@ -14,7 +14,6 @@ var port = process.env.PORT || 61676;
 //===============================================
 var mongoose = require('mongoose'); 
 
-
 var Bear = require('./app/models/bear.js');
 
 
@@ -51,6 +50,17 @@ router.route('/bears')
 				res.send(err);
 
 			res.json({ message: 'Bear created' });
+		});
+	})
+
+	//(GET http://localhost:61676/api/bears)
+	.get(function(req, res){
+
+		Bear.find(function(err, bears){
+			if(err)
+				res.send(err);
+
+			res.json(bears);
 		});
 	});
 
