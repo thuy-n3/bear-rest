@@ -13,8 +13,7 @@ var port = process.env.PORT || 61676;
 //CONNECTING DATABASE
 //===============================================
 var mongoose = require('mongoose'); 
-mongoose.connect('mongodb://t3nguyen:d3vm0ng0@ds061676.mlab.com:61676/rest_bear');
-//change to process.env.MONGOLAB_URI. when pushing to github 
+
 
 var Bear = require('./app/models/bear.js');
 
@@ -77,8 +76,26 @@ router.route('/bears/:bear_id')
 				res.send(err);
 			res.json(bear);
 		});
-	});
+	})
 
+	//update bear with id (PUT http://localhost:61676/api/bears/:bear_id)
+	.put(function(req, res){
+
+		Bear.findById(req.params.bear_id, function(err, bear){
+
+			if(err)
+				res.send(err);
+
+			bear.name = req.body.name; //update bear info
+
+			bear.save(function(err){
+				if(err)
+					res.send(err); 
+
+				res.json({ message: 'Bear update!' });
+			});
+		});
+	});
 
 //REGISTER ROUTES 
 //===============================================
