@@ -7,23 +7,54 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 61676; 
+
 
 //CONNECTING DATABASE
 //===============================================
 var mongoose = require('mongoose'); 
-mongoose.connect('mongodb://t3nguyen:n0d3b3@rs@ds053166.mlab.com:53166/bear-rest');
+
+
+var Bear = require('./app/models/bear.js');
 
 
 //ROUTES FOR API 
 //===============================================
 var router = express.Router(); 
 
-router.get('/', function(req,res){
+//middleware for all requests 
+router.use(function(req, res, next){
+	console.log('Something is happening.');
+	next();
+})
+
+//test routes (GET http://localhost:61676/api)
+router.get('/', function(req, res){
 	res.json({ message: 'hooray! welcome to our api!'}); 
 });
 
 //more route here 
+
+
+
+//routes that end in '/bears'
+router.route('/bears')
+
+	//(POST http://localhost:61676/api/bears)
+	.post(function(req, res){
+
+		var bear = new Bear();
+		bear.name = req.body.name; 
+
+		bear.save(function(err){
+			if(err)
+				res.send(err);
+
+			res.json({ message: 'Bear created' });
+		});
+	});
+
+
 
 //REGISTER ROUTES 
 //===============================================

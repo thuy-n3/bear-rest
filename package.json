@@ -7,17 +7,26 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thuy-n3/bear-rest.git"
+  },
   "keywords": [
-    "bear-rest",
+    "bear",
     "rest",
     "api",
+    "bear-rest",
     "nodejs"
   ],
   "author": "Thuy Nguyen",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thuy-n3/bear-rest/issues"
+  },
+  "homepage": "https://github.com/thuy-n3/bear-rest#readme", 
   "dependencies": {
     "express": "~4.0.0",
-    "mongoose": "~3.6.13",
+    "mongoose": ">3.6.13",
     "body-parser": "~1.0.1"
   }
 }
