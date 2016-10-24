@@ -13,7 +13,7 @@ var port = process.env.PORT || 61676;
 //CONNECTING DATABASE
 //===============================================
 var mongoose = require('mongoose'); 
-mongoose.connect('mongodb://t3nguyen:d3vm0ng0@ds061676.mlab.com:61676/rest_bear');
+
 //change to process.env.MONGOLAB_URI. when pushing to github 
 
 var Bear = require('./app/models/bear.js');
